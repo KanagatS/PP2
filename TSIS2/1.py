@@ -1,4 +1,2 @@
-print ('Hello GIT')
-print (':D:D:D:D')
-
-#test
+s = input()
+print(s.replace('.', '[.]'))
