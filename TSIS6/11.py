@@ -3,7 +3,10 @@ def perfect_number(n):
     for x in range(1, n):
         if n % x == 0:
             sum += x
-    return sum == n
+    if sum == n:
+        return 'YES'
+    else:
+        return 'NO'
 
 
-print(perfect_number(6))
+print(perfect_number(4))

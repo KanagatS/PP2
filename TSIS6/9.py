@@ -3,10 +3,11 @@ def is_prime(numb):
         return False
 
     for i in range(2, numb):
-        if nums % i == 0:
+        if numb % i == 0:
             return False
-    
+
     return True
 
 
-print(is_prime(2))
+n = int(input())
+print(is_prime(n))

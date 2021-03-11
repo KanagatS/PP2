@@ -1,4 +1,4 @@
 def mx(a, b, c):
     return max(a, b, c)
-
-print(mx(1, 2, 3))
+a, b, c = map(int, input().split())
+print(mx(a, b, c))

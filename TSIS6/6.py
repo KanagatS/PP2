@@ -5,8 +5,6 @@ def check(n, a, b):
         return 'NO'
 
 
-n = int(input('Enter the number: '))
-a = int(input('Enter the start of range: '))
-b = int(input('Enter the end of range: '))
+n, a, b = map(int, input().split())
 
 print(check(n, a, b))
