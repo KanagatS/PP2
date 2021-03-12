@@ -1,0 +1,19 @@
+EXERCISES:
+
+Python Intro => Done
+Python User Input => Done
+Python Get Started => Done
+Python Syntax => Done
+Python Comments => Done
+Python Variables => Done
+Python Data Types => Done
+Python Numbers => Done
+Python Casting => Done
+Python Strings => Done
+Python String Formatting => Done
+Python Booleans => Done
+Python Operators => Done
+Python If...Else => Done
+Python While Loops => Done
+Python For Loops => Done
+Python Arrays => Done
