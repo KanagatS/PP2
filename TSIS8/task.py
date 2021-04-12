@@ -43,8 +43,7 @@ class Coins(pygame.sprite.Sprite):
         super().__init__()
         self.image = COIN
         self.surf = pygame.Surface((20, 20))
-        self.rect = self.surf.get_rect(
-            center=(random.randint(60, WIDTH - 55), 5))
+        self.rect = self.surf.get_rect(center=(random.randint(60, WIDTH - 55), 5))
 
     def move(self):
         global SCORE
@@ -64,11 +63,10 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
         self.image = ENEMY
         self.surf = pygame.Surface((50, 100))
-        self.rect = self.surf.get_rect(
-            center=(random.randint(60, WIDTH - 55), 5))
+        self.rect = self.surf.get_rect(center=(random.randint(60, WIDTH - 55), 5))
 
     def move(self):
-        self.rect.move_ip(0, 10)  # RANDOM SPEED OF ENEMY
+        self.rect.move_ip(0, random.randint(1, 6))  # RANDOM SPEED OF ENEMY
         if (self.rect.top > HEIGHT):
             self.rect.top = 5
             self.rect.center = (random.randint(60, WIDTH - 55), 5)
