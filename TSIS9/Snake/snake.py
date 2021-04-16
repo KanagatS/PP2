@@ -13,6 +13,7 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 LIGHT_GREEN = (153, 255, 153)
+YELLOW = (255, 255, 0)
 
 WALL = pygame.image.load('wall.png')
 FRUITS = [pygame.image.load('apple.png'), pygame.image.load('sliva.png')]
@@ -66,6 +67,54 @@ class Snake():
         self.is_add = False
 
 
+def save_game():
+    pass
+
+
+def draw_menu():
+    BG = pygame.image.load('background.jpg')
+    BG = pygame.transform.scale(BG, (800, 800))
+
+    FONT = pygame.font.SysFont('Arial', 50)
+    FONT_small = pygame.font.SysFont('Arial', 35)
+    FONT_verysmall = pygame.font.SysFont('Arial', 22)
+
+    WIN.blit(BG, (0, 0))
+    CHOOSE_MODE = FONT.render('CHOOSE GAME MODE', True, WHITE)
+    SINGLEPLAYER = FONT_small.render('SINGLE PLAYER', True, WHITE)
+    MULTIPLAYER = FONT_small.render('MULTI PLAYER', True, WHITE)
+    CHOOSE_LEVEL = FONT.render('CHOOSE LEVEL', True, WHITE)
+
+    WIN.blit(CHOOSE_MODE, (130, 130))
+    WIN.blit(SINGLEPLAYER, (80, 260))
+    WIN.blit(MULTIPLAYER, (480, 260))
+    pygame.draw.rect(WIN, YELLOW, [60, 250, 310, 60], 3)
+    pygame.draw.rect(WIN, YELLOW, [450, 250, 310, 60], 3)
+
+    WIN.blit(CHOOSE_LEVEL, (210, 400))
+    pygame.draw.rect(WIN, YELLOW, [60, 500, 175, 175], 3)
+    pygame.draw.rect(WIN, YELLOW, [313, 500, 175, 175], 3)
+    pygame.draw.rect(WIN, YELLOW, [565, 500, 175, 175], 3)
+
+    EASY = FONT_small.render('EASY', True, WHITE)
+    EASY_text = FONT_verysmall.render('Free Field, Speed - 4', True, WHITE)
+
+    MEDIUM = FONT_small.render('MEDIUM', True, WHITE)
+    MEDIUM_text = FONT_verysmall.render('Borders, Speed - 7', True, WHITE)
+
+    HARD = FONT_small.render('HARD', True, WHITE)
+    HARD_text = FONT_verysmall.render('Labirint, Speed - 10', True, WHITE)
+
+    WIN.blit(EASY, (100, 685))
+    WIN.blit(EASY_text, (45, 730))
+
+    WIN.blit(MEDIUM, (330, 685))
+    WIN.blit(MEDIUM_text, (308, 730))
+
+    WIN.blit(HARD, (605, 685))
+    WIN.blit(HARD_text, (560, 730))
+
+
 def game_over():
     WIN.fill(RED)
     GAMEOVER_TEXT = FONT.render('GAME OVER!', True, BLACK)
@@ -80,6 +129,9 @@ def game_over():
     WIN.blit(LOOSER_TEXT, (200, 500))
     pygame.display.update()
     time.sleep(2)
+
+    save_game()
+
     pygame.quit()
 
 
@@ -112,7 +164,7 @@ def draw_walls():
         WIN.blit(WALL, (WIDTH - 32, y))
 
 
-def collision_with_food1():
+def collision_with_food_snake1():
     if (food.x in range(snake.elements[0][0] - 35, snake.elements[0][0]) and
             (food.y in range(snake.elements[0][1] - 35, snake.elements[0][1]))):
         snake.is_add = True
@@ -120,7 +172,7 @@ def collision_with_food1():
         food.y = random.randint(32, HEIGHT - 32 - 35)
 
 
-def collision_with_food2():
+def collision_with_food_snake2():
     if (food.x in range(snake2.elements[0][0] - 35, snake2.elements[0][0]) and
             (food.y in range(snake2.elements[0][1] - 35, snake2.elements[0][1]))):
         snake2.is_add = True
@@ -146,12 +198,12 @@ def draw_window():
     snake2.draw()
     snake2.move()
 
-    collision_with_food1()
-    collision_with_food2()
+    collision_with_food_snake1()
+    collision_with_food_snake2()
 
     food.draw()
 
-    show_score(35, 35, snake.score)
+    show_score(40, 35, snake.score)
     show_score(580, 35, snake2.score)
 
 
@@ -203,6 +255,7 @@ def main():
         if collision_with_wall_snake1() or collision_with_wall_snake2():
             game_over()
         draw_window()
+        # draw_menu()
         pygame.display.update()
         clock.tick(FPS)
 
