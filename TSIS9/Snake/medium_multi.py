@@ -15,20 +15,22 @@ RED = (255, 0, 0)
 LIGHT_GREEN = (153, 255, 153)
 YELLOW = (255, 255, 0)
 
-WALL = pygame.image.load('wall.png')
-FRUITS = [pygame.image.load('apple.png'), pygame.image.load('sliva.png')]
+WALL = pygame.image.load('Pictures/wall.png')
+
+FRUITS = []
+for i in range(3):
+    FRUITS.append(pygame.image.load(f'Pictures/fruit_{i}.png'))
 
 FONT = pygame.font.SysFont('Courier', 35)
 
 FPS = 60
-VEL = 4
+VEL = 7
 
 
 class Food():
     def __init__(self):
         self.x = random.randint(32, WIDTH - 32 - 35)
         self.y = random.randint(32, HEIGHT - 32 - 35)
-        # self.image = pygame.image.load('apple.png')
         self.image = random.choice(FRUITS)
         self.image = pygame.transform.scale(self.image, (35, 35))
 

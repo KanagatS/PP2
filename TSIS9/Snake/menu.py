@@ -1,8 +1,10 @@
 import pygame
+import os
+import time
 
 pygame.init()
 
-pygame.display.set_caption('MENU BETA')
+pygame.display.set_caption('MENU')
 
 WIDTH, HEIGHT = 800, 800
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -10,13 +12,15 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
-LIGHT_GREEN = (153, 255, 153)
 YELLOW = (255, 255, 0)
 
-FPS = 30
+BG = pygame.image.load('Pictures/bg.jpg')
+BG = pygame.transform.scale(BG, (WIDTH, HEIGHT))
 
-BG = pygame.image.load('background.jpg')
-BG = pygame.transform.scale(BG, (800, 800))
+SNAKE_HEAD = pygame.image.load('Pictures/snake_head.png')
+
+ARROW = pygame.image.load('Pictures/arrow.png')
+ARROW = pygame.transform.rotate(ARROW, 90)
 
 FONT = pygame.font.SysFont('Arial', 50)
 FONT_small = pygame.font.SysFont('Arial', 35)
@@ -27,32 +31,76 @@ FONT_verysmall = pygame.font.SysFont('Arial', 22)
 # HARDLEVEL = pygame.image.load('hard.jpg')
 
 
-def draw_menu():
+def menu_functions(click, single, multi):
+    easy_level_button = pygame.Rect(60, 500, 175, 175)
+    medium_level_button = pygame.Rect(313, 500, 175, 175)
+    hard_level_button = pygame.Rect(565, 500, 175, 175)
+
+    easy, medium, hard = False, False, False
+
+    mx, my = pygame.mouse.get_pos()
+
+    if easy_level_button.collidepoint((mx, my)) and click:
+        easy = True
+
+    elif medium_level_button.collidepoint((mx, my)) and click:
+        medium = True
+
+    elif hard_level_button.collidepoint((mx, my)) and click:
+        hard = True
+
+    if single:
+        if easy:
+            os.system('easy_single.py')
+        elif medium:
+            os.system('medium_single.py')
+        elif hard:
+            os.system("hard_single.py")
+
+    elif multi:
+        if easy:
+            os.system('easy_multi.py')
+        elif medium:
+            time.sleep(0.5)
+            os.system("medium_multi.py")
+        elif hard:
+            os.system("hard_multi.py")
+
+
+def draw_menu(single, multi):
     WIN.blit(BG, (0, 0))
-    CHOOSE_MODE = FONT.render('CHOOSE GAME MODE', True, WHITE)
-    SINGLEPLAYER = FONT_small.render('SINGLE PLAYER', True, WHITE)
-    MULTIPLAYER = FONT_small.render('MULTI PLAYER', True, WHITE)
-    CHOOSE_LEVEL = FONT.render('CHOOSE LEVEL', True, WHITE)
+
+    CHOOSE_MODE = FONT.render('CHOOSE GAME MODE', True, BLACK)
+    SINGLEPLAYER = FONT_small.render('SINGLE PLAYER', True, BLACK)
+    MULTIPLAYER = FONT_small.render('MULTI PLAYER', True, BLACK)
+    CHOOSE_LEVEL = FONT.render('CHOOSE LEVEL', True, BLACK)
 
     WIN.blit(CHOOSE_MODE, (130, 130))
     WIN.blit(SINGLEPLAYER, (80, 260))
     WIN.blit(MULTIPLAYER, (480, 260))
+    WIN.blit(CHOOSE_LEVEL, (210, 400))
+
+    WIN.blit(SNAKE_HEAD, (60, 180))
+    WIN.blit(SNAKE_HEAD, (670, 180))
+    WIN.blit(SNAKE_HEAD, (700, 180))
+
+    # Frames around the inscription
     pygame.draw.rect(WIN, YELLOW, [60, 250, 310, 60], 3)
     pygame.draw.rect(WIN, YELLOW, [450, 250, 310, 60], 3)
 
-    WIN.blit(CHOOSE_LEVEL, (210, 400))
-    pygame.draw.rect(WIN, YELLOW, [60, 500, 175, 175], 3)
+    pygame.draw.rect(WIN, YELLOW, [60, 500, 175, 175], 3)  # EASY MAP PICTURE
+    # MEDIUM MAP PICTURE
     pygame.draw.rect(WIN, YELLOW, [313, 500, 175, 175], 3)
-    pygame.draw.rect(WIN, YELLOW, [565, 500, 175, 175], 3)
+    pygame.draw.rect(WIN, YELLOW, [565, 500, 175, 175], 3)  # HARD MAP PICTURE
 
     EASY = FONT_small.render('EASY', True, WHITE)
-    EASY_text = FONT_verysmall.render('Free Field, Speed - 4', True, WHITE)
+    EASY_text = FONT_verysmall.render('Free Field, Speed - 5', True, WHITE)
 
     MEDIUM = FONT_small.render('MEDIUM', True, WHITE)
     MEDIUM_text = FONT_verysmall.render('Borders, Speed - 7', True, WHITE)
 
     HARD = FONT_small.render('HARD', True, WHITE)
-    HARD_text = FONT_verysmall.render('Labirint, Speed - 10', True, WHITE)
+    HARD_text = FONT_verysmall.render('Labirint, Speed - 8', True, WHITE)
 
     WIN.blit(EASY, (100, 685))
     WIN.blit(EASY_text, (45, 730))
@@ -63,10 +111,16 @@ def draw_menu():
     WIN.blit(HARD, (605, 685))
     WIN.blit(HARD_text, (560, 730))
 
+    if single:
+        WIN.blit(ARROW, (170, 320))
+    elif multi:
+        WIN.blit(ARROW, (565, 320))
+
 
 def main():
-    clock = pygame.time.Clock()
     run = True
+    click = False
+    single, multi = False, False
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -74,10 +128,19 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
+                elif event.key == pygame.K_1:
+                    single = True
+                    multi = False
+                elif event.key == pygame.K_2:
+                    multi = True
+                    single = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                click = True
 
-        draw_menu()
+        draw_menu(single, multi)
+        menu_functions(click, single, multi)
         pygame.display.update()
-        clock.tick(FPS)
+        click = False
 
     pygame.quit()
 
