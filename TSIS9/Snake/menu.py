@@ -51,19 +51,24 @@ def menu_functions(click, single, multi):
 
     if single:
         if easy:
+            time.sleep(0.5)
             os.system('easy_single.py')
         elif medium:
+            time.sleep(0.5)
             os.system('medium_single.py')
         elif hard:
+            time.sleep(0.5)
             os.system("hard_single.py")
 
     elif multi:
         if easy:
+            time.sleep(0.5)
             os.system('easy_multi.py')
         elif medium:
             time.sleep(0.5)
             os.system("medium_multi.py")
         elif hard:
+            time.sleep(0.5)
             os.system("hard_multi.py")
 
 

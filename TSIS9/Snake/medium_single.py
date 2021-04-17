@@ -22,6 +22,7 @@ for i in range(3):
     FRUITS.append(pygame.image.load(f'Pictures/fruit_{i}.png'))
 
 FONT = pygame.font.SysFont('Courier', 35)
+FONT_2 = pygame.font.SysFont('Arial', 48)
 
 FPS = 60
 VEL = 7
@@ -75,13 +76,14 @@ def save_game():
 
 def game_over():
     WIN.fill(RED)
-    GAMEOVER_TEXT = FONT.render('GAME OVER!', True, BLACK)
-    SCORE_TEXT = FONT.render('Your score: ' + str(snake.score), True, BLACK)
-    WIN.blit(GAMEOVER_TEXT, (200, 200))
-    WIN.blit(SCORE_TEXT, (200, 300))
+    GAMEOVER_TEXT = FONT_2.render('GAME OVER!', True, BLACK)
+    SCORE_TEXT = FONT_2.render('Your score: ' + str(snake.score), True, BLACK)
+
+    WIN.blit(GAMEOVER_TEXT, (240, 250))
+    WIN.blit(SCORE_TEXT, (240, 350))
 
     pygame.display.update()
-    time.sleep(2)
+    time.sleep(5)
 
     save_game()
 
