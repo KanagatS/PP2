@@ -39,27 +39,38 @@ class Food():
 
 class Snake():
     def __init__(self):
-        self.size = 2
+        self.size = 3
         self.radius = 10
         self.dx = VEL
         self.dy = 0
-        self.elements = [[100, 100], [120, 100]]
+        self.elements = [[100, 100], [120, 100], [140, 100]]
         self.score = 0
         self.is_add = False
+        self.dir = 'right'
 
     def draw(self):
-        for element in self.elements:
+        for element in self.elements[1:]:
             pygame.draw.circle(WIN, BLACK, element, self.radius)
 
     def move(self):
         if self.is_add:
             self.addSnake()
+
         for i in range(self.size - 1, 0, -1):
-            self.elements[i][0] = self.elements[i-1][0]
-            self.elements[i][1] = self.elements[i-1][1]
+            self.elements[i][0] = self.elements[i - 1][0]
+            self.elements[i][1] = self.elements[i - 1][1]
 
         self.elements[0][0] += self.dx
         self.elements[0][1] += self.dy
+
+        if self.elements[0][0] > WIDTH:
+            self.elements[0][0] = 0
+        elif self.elements[0][0] < 0:
+            self.elements[0][0] = WIDTH
+        elif self.elements[0][1] > HEIGHT:
+            self.elements[0][1] = 0
+        elif self.elements[0][1] < 0:
+            self.elements[0][1] = HEIGHT
 
     def addSnake(self):
         self.size += 1
@@ -82,7 +93,7 @@ def game_over():
     WIN.blit(SCORE_TEXT, (240, 350))
 
     pygame.display.update()
-    time.sleep(5)
+    time.sleep(3)
 
     save_game()
 
@@ -90,7 +101,10 @@ def game_over():
 
 
 def collision_with_tail():
-    pass
+    if snake.elements[0] in snake.elements[1:]:
+        return True
+    else:
+        return False
 
 
 def collision_with_food():
@@ -123,18 +137,22 @@ def draw_window():
 
 def movement():
     pressed = pygame.key.get_pressed()
-    if pressed[pygame.K_RIGHT]:
+    if pressed[pygame.K_RIGHT] and snake.dir != 'left':
         snake.dx = VEL
         snake.dy = 0
-    elif pressed[pygame.K_LEFT]:
+        snake.dir = 'right'
+    elif pressed[pygame.K_LEFT] and snake.dir != 'right':
         snake.dx = -VEL
         snake.dy = 0
-    elif pressed[pygame.K_UP]:
+        snake.dir = 'left'
+    elif pressed[pygame.K_UP] and snake.dir != 'down':
         snake.dx = 0
         snake.dy = -VEL
-    elif pressed[pygame.K_DOWN]:
+        snake.dir = 'up'
+    elif pressed[pygame.K_DOWN] and snake.dir != 'up':
         snake.dx = 0
         snake.dy = VEL
+        snake.dir = 'down'
 
 
 snake = Snake()
@@ -154,6 +172,7 @@ def main():
 
         if collision_with_tail():
             game_over()
+        
         draw_window()
         pygame.display.update()
         clock.tick(FPS)
