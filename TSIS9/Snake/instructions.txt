@@ -1,0 +1,9 @@
+First of all u need to open 'menu.py' file.
+Then by clicking '1' or '2' buttons you can choose game mode.
+After that you should choose game level (easy, medium, hard).
+GLHF :D
+
+You can quit the game by clicking ESCAPE button
+
+Movement for single: UP, LEFT, DOWN, RIGHT
+Movement for multiplayer: W, A, S, D and UP, LEFT, DOWN, RIGHT

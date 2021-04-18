@@ -82,7 +82,13 @@ class Snake():
 
 
 def save_game():
-    pass
+    cur_time = time.strftime('%H:%M:%S', time.localtime())
+    
+    f = open('SavedGames.txt', 'a')
+    
+    f.write(f'Single player game on medium map was played at {cur_time} with a score of {snake.score}.\n\n')
+    
+    f.close()
 
 
 def game_over():
@@ -186,6 +192,7 @@ def main():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     run = False
+                    save_game()
 
         if collision_with_wall() or collision_with_tail():
             game_over()
