@@ -12,6 +12,7 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+GREEN = (0, 160, 0)
 YELLOW = (255, 255, 0)
 
 BG = pygame.image.load('Pictures/bg.jpg')
@@ -26,9 +27,9 @@ FONT = pygame.font.SysFont('Arial', 50)
 FONT_small = pygame.font.SysFont('Arial', 35)
 FONT_verysmall = pygame.font.SysFont('Arial', 22)
 
-# EASYLEVEL = pygame.image.load('easy.jpg')
-# MEDUIMLEVEL = pygame.image.load('medium.jpg')
-# HARDLEVEL = pygame.image.load('hard.jpg')
+EASYLEVEL = pygame.image.load('Levels/easy.png')
+MEDIUMLEVEL = pygame.image.load('Levels/medium.png')
+HARDLEVEL = pygame.image.load('Levels/hard.png')
 
 
 def menu_functions(click, single, multi):
@@ -93,10 +94,13 @@ def draw_menu(single, multi):
     pygame.draw.rect(WIN, YELLOW, [60, 250, 310, 60], 3)
     pygame.draw.rect(WIN, YELLOW, [450, 250, 310, 60], 3)
 
-    pygame.draw.rect(WIN, YELLOW, [60, 500, 175, 175], 3)  # EASY MAP PICTURE
-    # MEDIUM MAP PICTURE
-    pygame.draw.rect(WIN, YELLOW, [313, 500, 175, 175], 3)
-    pygame.draw.rect(WIN, YELLOW, [565, 500, 175, 175], 3)  # HARD MAP PICTURE
+    pygame.draw.rect(WIN, GREEN, [60, 500, 175, 175], 8)
+    pygame.draw.rect(WIN, YELLOW, [313, 500, 175, 175], 8)
+    pygame.draw.rect(WIN, RED, [565, 500, 175, 175], 8)
+
+    WIN.blit(EASYLEVEL, (60, 500))
+    WIN.blit(MEDIUMLEVEL, (313, 500))
+    WIN.blit(HARDLEVEL, (565, 500))
 
     EASY = FONT_small.render('EASY', True, WHITE)
     EASY_text = FONT_verysmall.render('Free Field, Speed - 5', True, WHITE)
