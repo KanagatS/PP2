@@ -48,11 +48,11 @@ def draw_line(screen, start, end, width, color):
             pygame.draw.circle(screen, color, (x, y), width)
 
 
-def draw_menu(open, color):
+def draw_menu(open, color, radius):
     pygame.draw.rect(WIN, BLACK, [0, 0, WIDTH, HEIGHT], 3)  # BORDER
 
     if open:
-        pygame.draw.rect(WIN, BLACK, [1440, 0, 160, 385], 3)
+        pygame.draw.rect(WIN, BLACK, [1440, 0, 160, 408], 3)
 
         WIN.blit(FONT.render('1 - ', True, BLACK), (1450, 5))
         WIN.blit(FONT.render('2 - ', True, BLACK), (1450, 45))
@@ -72,8 +72,10 @@ def draw_menu(open, color):
         pygame.draw.rect(WIN, BLACK, [1500, 245, 50, 30], 3)
         pygame.draw.circle(WIN, BLACK, (1520, 304), 15, 3)
 
-        pygame.draw.rect(WIN, BLACK, [1448, 323, 43, 43], 3)  # FRAME AROUND CURRENT COLOR
-        pygame.draw.rect(WIN, color, [1450, 325, 40, 40])  # CURRENT COLOR
+        pygame.draw.rect(WIN, BLACK, [1448, 323, 43, 43], 3)
+        pygame.draw.rect(WIN, color, [1450, 325, 40, 40])
+
+        WIN.blit(FONT.render('R = ' + str(radius), True, BLACK), (1450, 370))
 
 
 def main():
@@ -86,6 +88,7 @@ def main():
     WIN.fill(WHITE)
 
     while run:
+        mx, my = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -97,7 +100,7 @@ def main():
                     open = not open
 
                 elif event.key == pygame.K_q:  # CLEAR
-                    WIN.fill((255, 255, 255))
+                    WIN.fill(WHITE)
 
                 elif event.key == pygame.K_e:  # ERASER
                     color = WHITE
@@ -112,10 +115,15 @@ def main():
                 elif event.key == pygame.K_5:
                     color = YELLOW
 
-                elif event.key == pygame.K_UP and radius <= 30:
+                elif event.key == pygame.K_UP and radius < 30:
                     radius += 1
                 elif event.key == pygame.K_DOWN and radius >= 3:
                     radius -= 1
+
+                elif event.key == pygame.K_r:
+                    pygame.draw.rect(WIN, color, [mx, my, radius + 200, radius + 100], 4)
+                elif event.key == pygame.K_c:
+                    pygame.draw.circle(WIN, color, (mx, my), radius + 50, 4)
 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 pygame.draw.circle(WIN, color, event.pos, radius)
@@ -129,7 +137,7 @@ def main():
                     draw_line(WIN, last_pos, event.pos, radius, color)
                 last_pos = event.pos
 
-        draw_menu(open, color)
+        draw_menu(open, color, radius)
         pygame.display.update()
     pygame.quit()
 

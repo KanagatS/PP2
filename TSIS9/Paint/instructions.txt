@@ -1,0 +1,11 @@
+Hi!
+
+There is a paint clone made by pygame module!
+
+You can press 'o' to see some hints.
+
+If you press 'q' you will clean all of your desk.
+
+If you quit the game by ESC your picture will be automatically saved in the folder.
+
+GL :D
