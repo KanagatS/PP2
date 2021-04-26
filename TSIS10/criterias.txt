@@ -2,5 +2,5 @@
 2) creating new PostgreSQL tables in Python - 1 pt => Done
 3) inserting data into the PostgreSQL table in Python - 2.5 pts => Done
 4) updating data in the PostgreSQL table in Python - 2.5 pts => Done
-5) querying data from the PostgreSQL tables - 3.5 pts
-6) deleting data from PostgreSQL tables in Python - 2 pts
+5) querying data from the PostgreSQL tables - 3.5 pts => Done
+6) deleting data from PostgreSQL tables in Python - 2 pts => Done
