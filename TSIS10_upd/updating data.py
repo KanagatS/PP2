@@ -2,17 +2,17 @@ import psycopg2
 
 con = psycopg2.connect(
     host='localhost',
-    database='testing',
+    database='tsis',
     user='postgres',
     port=6666,
-    password='***'
+    password=''
 )
 
 cur = con.cursor()
 
 # ===============================================
 
-sql = """UPDATE table1
+sql = """UPDATE student
         SET name = %s
         WHERE id = %s"""
 

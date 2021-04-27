@@ -5,7 +5,7 @@ con = psycopg2.connect(
     database='testing',
     user='postgres',
     port=6666,
-    password='***'
+    password=''
 )
 
 cur = con.cursor()
@@ -13,15 +13,9 @@ cur = con.cursor()
 # ===============================================
 
 commands = (
-    """
-        CREATE TABLE table1 (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL
-        )
-        """,
-    """ CREATE TABLE table2 (
-                course SERIAL PRIMARY KEY,
-                GPA VARCHAR(255) NOT NULL
+    """ CREATE TABLE test(
+                id serial primary key,
+                name varchar(200) not null
                 )
         """,
 )

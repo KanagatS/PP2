@@ -2,17 +2,17 @@ import psycopg2
 
 con = psycopg2.connect(
     host='localhost',
-    database='testing',
+    database='tsis',
     user='postgres',
     port=6666,
-    password='***'
+    password=''
 )
 
 cur = con.cursor()
 
 # ===============================================
 
-sql = """SELECT id, name FROM table1"""
+sql = """SELECT id, name FROM student"""
 
 cur.execute(sql)
 

@@ -5,14 +5,14 @@ con = psycopg2.connect(
     database='testing',
     user='postgres',
     port=6666,
-    password='***'
+    password=''
 )
 
 cur = con.cursor()
 
 # ===============================================
 
-sql = """INSERT INTO table1(name) VALUES(%s);"""
+sql = """INSERT INTO test(name) VALUES(%s);"""
 
 cur.execute(sql, ('Kanagat',))
 
