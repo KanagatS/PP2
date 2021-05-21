@@ -8,7 +8,7 @@ def isPrime(n):
     return True
 
 
-l = [int(i) for i in sys.stdin.read().split()]
+l = sys.stdin.read().split()
 s = set()
 
 for i in range(len(l)):

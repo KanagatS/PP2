@@ -1,6 +1,6 @@
 import sys
 
-l = [i for i in sys.stdin.read().split()]
+l = sys.stdin.read().split()
 
 d = dict()
 

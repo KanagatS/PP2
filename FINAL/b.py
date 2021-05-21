@@ -1,7 +1,7 @@
 import sys
 
 s = input()
-a = [i for i in sys.stdin.read().split()]
+a = sys.stdin.read().split()
 
 res = set()
 

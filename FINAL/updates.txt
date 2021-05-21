@@ -1,5 +1,5 @@
 Not solved yet:
-    H X
+    X
     
 Solved after deadline:
-    B E I G P L Q
+    B E G H I L P Q

@@ -1,0 +1,6 @@
+5
+Aspan 10
+Aykhan 20
+Bekbolat 10
+Aspan 35
+Bekbolat 30

@@ -1,7 +1,7 @@
 import sys
 
 alphabet = [chr(i) for i in range(ord('a'), ord('z')+1)]
-s = [i for i in sys.stdin.read().split()]
+s = sys.stdin.read().split()
 
 for i in alphabet:
     cnt = 0
