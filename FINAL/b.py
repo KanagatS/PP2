@@ -1,15 +1,12 @@
-str, a = input(), []
+import sys
+
+s = input()
+a = [i for i in sys.stdin.read().split()]
+
 res = set()
 
-while True:
-    s = input()
-    if s != '':
-        a.append(s)
-    else:
-        break
-
 for i in range(len(a)):
-    if sorted(str) != sorted(a[i]):
+    if sorted(s) != sorted(a[i]):
         res.add(a[i])
 
 

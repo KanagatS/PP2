@@ -1,12 +1,11 @@
-b = ''
-f = open('input.txt', 'r')
-content = f.read()
-b += content
-b = list(b)
-for i in range(len(b)):
-    if b[i] == ' ' or b[i] == '\n':
-        b[i] = ''
-    b[i] = b[i].lower()
+import sys
 
-for char in range(ord('a'), ord('z') + 1):
-    print(chr(char), b.count(chr(char)), sep=' => ', end='\n')
+alphabet = [chr(i) for i in range(ord('a'), ord('z')+1)]
+s = [i for i in sys.stdin.read().split()]
+
+for i in alphabet:
+    cnt = 0
+    for j in s:
+        if i == j[0]:
+            cnt += 1
+    print(cnt)

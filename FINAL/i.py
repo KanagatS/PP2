@@ -1,17 +1,11 @@
-#s = input().split()
+import sys
+
+l = [i for i in sys.stdin.read().split()]
+
 d = dict()
-a = ''
-while True:
-    s = input()
-    if s != '':
-        a += s + ' '
-    else:
-        break
 
-a.split()
-a=list(a)
-
-for i in a:
+for i in l:
     d[i] = d.get(i, 0) + 1
+
 for key, value in sorted(d.items()):
     print(key + ' ' + str(value))
