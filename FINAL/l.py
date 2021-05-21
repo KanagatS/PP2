@@ -1,16 +1,11 @@
 n, m = map(int, input().split())
 
-mx = 0
-index = 0
-indexmax = 0
+mx, indexmax = 0, 1
 
-for i in range(n):
+for index in range(1, n+1):
     l = [int(i) for i in input().split()]
-    sm = sum(l)
-    if sm > mx:
-        mx = l
+    if sum(l) > mx:
+        mx = sum(l)
         indexmax = index
-
-    index += 1
 
 print(indexmax)
